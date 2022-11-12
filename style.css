@@ -1,0 +1,33 @@
+* {
+    font-size: 40px;
+    font-weight: bold;
+    font-family: Helvetica, sans-serif;
+    color: white;
+}
+
+html{
+    background-color: rgb(24, 22, 22);
+}
+
+
+#buttons-bar{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    width: 400px;
+    height: 400px;
+    gap: 1px;
+}
+
+#buttons-bar button{
+    background-color: rgb(45, 45, 45);
+    border: black 1px solid;
+    justify-self: stretch;
+}
+
+#equals{
+    grid-column-start: 2;
+    grid-column-end: span 2;
+    justify-self: stretch;
+}

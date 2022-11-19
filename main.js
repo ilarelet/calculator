@@ -1,7 +1,7 @@
 //initializing calculation variables
-let number1 = null;
-let number2 = null;
-let operator = "";
+var number1 = null;
+var number2 = null;
+var operator = "";
 
 
 //result text field initiatialization
@@ -56,15 +56,19 @@ operButton.forEach(element => {
 
 //function, responsible for reading the variables to be used in the calculation
 const numButton = document.querySelectorAll(".num-button");
-numButton.forEach(element => {
-    element.addEventListener('click', (e,operator) => {
-        if ((operator === '') || (operator === undefined)){
-            number1 = e.target.id; //A is the first variable, hence if the operator is not yet picked we assign the value to it
-            resultText.textContent='number1';
+numButton.forEach((element) => {
+    element.addEventListener('click', (e) => {
+        let current_operator = resultText.textContent[resultText.textContent.length-1]
+        if (current_operator === '+' ||
+        current_operator === '-' ||
+        current_operator === '*' ||
+        current_operator === '/'){
+            number2 = e.target.id;// if the operator has been chosen tha velue becomes assigned to B
+            resultText.textContent+=number2;
         }
         else {
-            number2 = e.target.id;// if the operator has been chosen tha velue becomes assigned to B
-            resultText.textContent+='number2';
+            number1 = e.target.id; //A is the first variable, hence if the operator is not yet picked we assign the value to it
+            resultText.textContent=number1;
         }
     })
 });
@@ -72,8 +76,17 @@ numButton.forEach(element => {
 //clear button
 const clearButton = document.querySelector('#clear');
 clearButton.addEventListener('click', function(){
-    let number1 = null;
-    let number2 = null;
-    let operator = "";
+    number1 = null;
+    number2 = null;
+    operator = "";
     resultText.textContent = "0";
+})
+
+const equalsButton = document.querySelector('#equals');
+equalsButton.addEventListener('click', function(){
+    if (number1 && number2 && operator){
+        result = operate(number1, number2, operator);
+        resultText.textContent = result;
+    }
+    else alert('Enter your numbers first');
 })

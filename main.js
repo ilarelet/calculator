@@ -2,6 +2,7 @@
 var number1 = null;
 var number2 = null;
 var operator = "";
+let calculation_finished = false
 
 
 //result text field initiatialization
@@ -15,6 +16,10 @@ const multiply = (a,b) => a*b;
 const divide = (a,b) => {
     if (b===0){
         alert("Do not devide by zero!");
+        number1 = null;
+        number2 = null;
+        operator = "";
+        resultText.textContent = result;
     }
     else{
         return (a/b);
@@ -49,8 +54,19 @@ let operate = (a,b, op) => {
 const operButton = document.querySelectorAll(".oper-button");
 operButton.forEach(element => {
     element.addEventListener('click', e => {
-        operator = e.target.id;
-        resultText.textContent+=operator;
+        if (number1 === null){
+            number1 = Number(resultText.textContent);
+            operator = e.target.id;
+            resultText.textContent=0;
+        }
+        else {
+            number2 = Number(resultText.textContent);
+            result = operate(number1, number2, operator);
+            operator = e.target.id;
+            number1 = result;
+            number2 = null;
+            resultText.textContent = 0;
+        }        
     });
 });
 
@@ -58,18 +74,13 @@ operButton.forEach(element => {
 const numButton = document.querySelectorAll(".num-button");
 numButton.forEach((element) => {
     element.addEventListener('click', (e) => {
-        let current_operator = resultText.textContent[resultText.textContent.length-1]
-        if (current_operator === '+' ||
-        current_operator === '-' ||
-        current_operator === '*' ||
-        current_operator === '/'){
-            number2 = e.target.id;// if the operator has been chosen tha velue becomes assigned to B
-            resultText.textContent+=number2;
+        if (resultText.textContent === '0' || calculation_finished === true){
+            calculation_finished = false
+            resultText.textContent=e.target.id;
         }
-        else {
-            number1 = e.target.id; //A is the first variable, hence if the operator is not yet picked we assign the value to it
-            resultText.textContent=number1;
-        }
+        else{
+            resultText.textContent+=e.target.id;
+        };
     })
 });
 
@@ -84,9 +95,27 @@ clearButton.addEventListener('click', function(){
 
 const equalsButton = document.querySelector('#equals');
 equalsButton.addEventListener('click', function(){
-    if (number1 && number2 && operator){
+    if (number1 && operator){
+        number2 = Number(resultText.textContent);
         result = operate(number1, number2, operator);
+        number1 = null;
+        number2 = null;
+        operator = "";
         resultText.textContent = result;
+        calculation_finished = true;
     }
-    else alert('Enter your numbers first');
+    else alert('Enter your numbers and choose the operator first');
 })
+
+
+/* 
+        let current_operator = resultText.textContent[resultText.textContent.length-1]
+        if (current_operator === '+' ||
+        current_operator === '-' ||
+        current_operator === '*' ||
+        current_operator === '/'){
+            number2 = e.target.id;// if the operator has been chosen tha velue becomes assigned to B
+            resultText.textContent+=number2;
+        }
+        else {
+*/

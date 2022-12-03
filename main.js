@@ -2,7 +2,7 @@
 var number1 = null;
 var number2 = null;
 var operator = "";
-let calculation_finished = false
+let calculation_finished = false;
 
 
 //result text field initiatialization
@@ -65,7 +65,8 @@ operButton.forEach(element => {
             operator = e.target.id;
             number1 = result;
             number2 = null;
-            resultText.textContent = 0;
+            resultText.textContent = result;
+            calculation_finished = true;
         }        
     });
 });
@@ -75,11 +76,11 @@ const numButton = document.querySelectorAll(".num-button");
 numButton.forEach((element) => {
     element.addEventListener('click', (e) => {
         if (resultText.textContent === '0' || calculation_finished === true){
-            calculation_finished = false
+            calculation_finished = false;
             resultText.textContent=e.target.id;
         }
         else{
-            resultText.textContent+=e.target.id;
+            resultText.textContent+=e.target.id;        
         };
     })
 });

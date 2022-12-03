@@ -85,15 +85,6 @@ numButton.forEach((element) => {
     })
 });
 
-//clear button
-const clearButton = document.querySelector('#clear');
-clearButton.addEventListener('click', function(){
-    number1 = null;
-    number2 = null;
-    operator = "";
-    resultText.textContent = "0";
-})
-
 const equalsButton = document.querySelector('#equals');
 equalsButton.addEventListener('click', function(){
     if (number1 && operator){
@@ -109,14 +100,22 @@ equalsButton.addEventListener('click', function(){
 })
 
 
-/* 
-        let current_operator = resultText.textContent[resultText.textContent.length-1]
-        if (current_operator === '+' ||
-        current_operator === '-' ||
-        current_operator === '*' ||
-        current_operator === '/'){
-            number2 = e.target.id;// if the operator has been chosen tha velue becomes assigned to B
-            resultText.textContent+=number2;
-        }
-        else {
-*/
+//clear button
+const clearButton = document.querySelector('#clear');
+clearButton.addEventListener('click', function(){
+    number1 = null;
+    number2 = null;
+    operator = "";
+    resultText.textContent = "0";
+})
+
+//delete button
+const deleteButton = document.querySelector('#delete');
+deleteButton.addEventListener('click', function(){
+    if (resultText.textContent.length > 1){
+        resultText.textContent = resultText.textContent.slice(0,-1);
+    }
+    else if (resultText.textContent !== "0"){
+        resultText.textContent = "0";
+    }
+})

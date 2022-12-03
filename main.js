@@ -119,3 +119,16 @@ deleteButton.addEventListener('click', function(){
         resultText.textContent = "0";
     }
 })
+
+//plusmin button
+const plusminButton = document.querySelector('#plusmin');
+plusminButton.addEventListener('click', function(){
+    if (resultText.textContent !== "0"){
+        if (Number(resultText.textContent)>0){
+            resultText.textContent = "-" + resultText.textContent;
+        }
+        else{
+            resultText.textContent = resultText.textContent.slice(1,);
+        }
+    }
+});

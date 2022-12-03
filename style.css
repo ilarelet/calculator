@@ -22,7 +22,7 @@ html{
     height: 400px;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     justify-items: center;
     gap: 1px;
 }
@@ -45,4 +45,8 @@ button{
     color: black;
     margin: 0 15px 0 0;
     line-height: 1.5em;
+}
+
+#equals{  
+    grid-column: span 2;
 }

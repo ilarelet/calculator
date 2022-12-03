@@ -10,21 +10,27 @@ const resultText = document.querySelector('#result-text');
 resultText.textContent='0';
 
 //Basic mathematical operator functions
-const add = (a,b) => a+b;
-const substract = (a,b) => a-b;
-const multiply = (a,b) => a*b;
+const add = (a,b) => Number(a)+Number(b);
+const substract = (a,b) => Number(a)-Number(b);
+const multiply = (a,b) => Number(a)*Number(b);
 const divide = (a,b) => {
     if (b===0){
         alert("Do not devide by zero!");
         number1 = null;
         number2 = null;
         operator = "";
-        resultText.textContent = result;
+        resultText.textContent = '0';
     }
     else{
-        return (a/b);
+        return (Number(a)/Number(b));
     }
 }
+
+const floatResult = (result) => {
+    result = Number(result)
+    if (Math.round(result) !== result) return result.toFixed(4)
+    else return result
+} 
 
 //buttons responsive design
 const buttons_bar=document.querySelector("#buttons-bar");
@@ -37,16 +43,16 @@ buttons.forEach(element => {
 //function performing the actual calculation
 let operate = (a,b, op) => {
     if (op === "+") {
-        return add(a,b);
+        return floatResult(add(a,b));
     }
     else if (op === "-") {
-        return substract(a,b);
+        return floatResult(substract(a,b));
     }
     else if (op === "*") {
-        return multiply(a,b);
+        return floatResult(multiply(a,b))
     }
     else if (op === "/") {
-        return divide (a,b);
+        return floatResult(divide (a,b));
     };
 };
 
@@ -58,6 +64,7 @@ operButton.forEach(element => {
             number1 = Number(resultText.textContent);
             operator = e.target.id;
             resultText.textContent=0;
+            calculation_finished = true;
         }
         else {
             number2 = Number(resultText.textContent);
@@ -107,6 +114,7 @@ clearButton.addEventListener('click', function(){
     number2 = null;
     operator = "";
     resultText.textContent = "0";
+    calculation_finished = false;
 })
 
 //delete button

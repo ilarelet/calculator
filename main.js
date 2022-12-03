@@ -132,3 +132,19 @@ plusminButton.addEventListener('click', function(){
         }
     }
 });
+
+//decimal point button fix
+const pointButton = document.querySelectorAll("#point");
+pointButton.forEach((element) => {
+    element.addEventListener('click', (e) => {
+        if (!(resultText.textContent.indexOf(".")>0)){ //prevents adding a second period to a number
+            if (resultText.textContent==="0"){
+                calculation_finished = false;
+                resultText.textContent="0.";
+            }
+            else{
+                resultText.textContent+=".";        
+            };
+        }
+    })
+});
